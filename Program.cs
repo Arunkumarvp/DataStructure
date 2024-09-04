@@ -10,7 +10,13 @@ public class Program
 
 
 
+        list.AddFirst(10);
+        list.AddFirst(20);
+        list.AddLast(30);
+        list.ReverseList();
+        list.PrintList(); // Output: 40 30 10 20
         list.PrintList(); // Output: 20 10 30
+
 
         Node foundNode = list.Find(10);
         if (foundNode != null)
@@ -46,4 +52,6 @@ public class Program
 
 
     }
+
+
 }

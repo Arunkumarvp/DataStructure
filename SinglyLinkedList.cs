@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace DataStructure
 {
+    /// <summary>
+    /// Represents a singly linked list data structure.
+    /// </summary>
     public class SinglyLinkedList
     {
         private Node head;
+
+        /// <summary>
+        /// Initializes a new instance of the SinglyLinkedList class.
+        /// </summary>
         public SinglyLinkedList()
         {
             this.head = null;
@@ -26,9 +33,9 @@ namespace DataStructure
         }
 
         /// <summary>
-        /// Add the data in the last node
+        /// Adds a new node with the specified data at the end of the linked list.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The data to be stored in the new node.</param>
         public void AddLast(int data)
         {
             Node newNode = new Node(data);
@@ -41,13 +48,36 @@ namespace DataStructure
             while (current.Next != null)
             {
                 current = current.Next;
-
             }
             current.Next = newNode;
         }
 
         /// <summary>
-        /// Print the all nodes in the list
+        /// Reverses the order of the nodes in the linked list.
+        /// </summary>
+        /// <returns>The data stored in the new head node after the reversal.</returns>
+        public int ReverseList()
+        {
+            if (head == null)
+            {
+                throw new InvalidOperationException("The list is empty.");
+            }
+            Node curr = head;
+            Node? prev = null;
+            Node? next = null;
+            while (curr != null)
+            {
+                next = curr.Next;
+                curr.Next = prev;
+                prev = curr;
+                curr = next;
+            }
+            head = prev;
+            return head.Data;
+        }
+
+        /// <summary>
+        /// Prints all the nodes in the linked list.
         /// </summary>
         public void PrintList()
         {
@@ -56,34 +86,33 @@ namespace DataStructure
             {
                 Console.WriteLine(current.ToString() + " ");
                 current = current.Next;
-
             }
             Console.WriteLine();
         }
-        /// <summary>
-        ///  Find a node with a specific value
 
+        /// <summary>
+        /// Finds the first node with the specified data in the linked list.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">The data to search for.</param>
+        /// <returns>The first node with the specified data, or null if not found.</returns>
         public Node Find(int data)
         {
             Node current = head;
-
             while (current != null)
             {
                 if (current.Data == data)
                 {
                     return current;
                 }
+                current = current.Next;
             }
             return null;
         }
 
         /// <summary>
-        /// Delete a node with a specific value
+        /// Deletes the first node with the specified data from the linked list.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The data to delete.</param>
         public void Delete(int data)
         {
             if (head == null)
@@ -97,7 +126,6 @@ namespace DataStructure
             Node current = head;
             while (current.Next != null)
             {
-
                 if (current.Next.Data == data)
                 {
                     current.Next = current.Next.Next;
@@ -105,6 +133,5 @@ namespace DataStructure
                 current = current.Next;
             }
         }
-
     }
 }
